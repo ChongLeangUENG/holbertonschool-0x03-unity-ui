@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed; // Adjustable speed in the Inspector
     private int score = 0;
     public int health = 5;
+    [SerializeField] Text scoreText;
 
     private void Start()
     {
@@ -51,8 +53,8 @@ public class PlayerController : MonoBehaviour
         {
             // Increment score when player touches a Pickup object
             score++;
-            Debug.Log("Score: " + score);
-
+            // Debug.Log("Score: " + score);
+            SetScoreText();
             // Disable or destroy the coin
             other.gameObject.SetActive(false); // Or Destroy(other.gameObject);
         }
@@ -67,5 +69,9 @@ public class PlayerController : MonoBehaviour
             // Player has touched the goal
             Debug.Log("You win!");
         }
+    }
+    private void SetScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString();
     }
 }
