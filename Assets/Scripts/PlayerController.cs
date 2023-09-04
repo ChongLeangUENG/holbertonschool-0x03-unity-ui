@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     public float speed; // Adjustable speed in the Inspector
     private int score = 0;
     public int health = 5;
-    [SerializeField] Text scoreText;
+    public Text scoreText;
+    public Text healthText;
 
     private void Start()
     {
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         {
             // Decrement health when player touches a Trap object
             health--;
-            Debug.Log("Health: " + health);
+            SetHealthText();
         }
         else if (other.CompareTag("Goal"))
         {
@@ -73,5 +74,10 @@ public class PlayerController : MonoBehaviour
     private void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    void SetHealthText()
+    {
+        healthText.text = "Health: " + health.ToString();
     }
 }
