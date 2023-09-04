@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public int health = 5;
     public Text scoreText;
     public Text healthText;
+    public GameObject winLoseText;
+    public GameObject winLoseBG;
 
     private void Start()
     {
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
             // Disable or destroy the coin
             other.gameObject.SetActive(false); // Or Destroy(other.gameObject);
         }
-        else if (other.CompareTag("Trap"))
+        if (other.CompareTag("Trap"))
         {
             // Decrement health when player touches a Trap object
             health--;
@@ -67,8 +69,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.CompareTag("Goal"))
         {
-            // Player has touched the goal
-            Debug.Log("You win!");
+            winLoseText.GetComponent<Text>().text = "You Win!";
+            winLoseText.GetComponent<Text>().color = Color.black;
+            winLoseBG.GetComponent<Image>().color = Color.green;
+            winLoseBG.SetActive(true);
         }
     }
     private void SetScoreText()
