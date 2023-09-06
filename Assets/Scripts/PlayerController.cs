@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             // Load the menu scene
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("menu");
         }
 
         if (health <= 0 && !isGameOver)
