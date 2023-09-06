@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public GameObject winLoseText;
     public GameObject winLoseBG;
 
+    private bool isGameOver = false;
+
     private void Start()
     {
         // Initialization code if needed
@@ -21,16 +23,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (health == 0)
+        if (health <= 0 && !isGameOver)
         {
-            Debug.Log("Game Over!");
+            // Set game over text and colors
+            winLoseText.GetComponent<Text>().text = "Game Over!";
+            winLoseText.GetComponent<Text>().color = Color.white;
+            winLoseBG.GetComponent<Image>().color = Color.red;
+            winLoseBG.SetActive(true);
+
+            // Disable further updates to prevent multiple triggers
+            isGameOver = true;
 
             // Reset health and score
             health = 5;
             score = 0;
-
-            // Reload the current scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -39,10 +45,12 @@ public class PlayerController : MonoBehaviour
         // Get input values
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+        Debug.Log("Horizontal Input: " + horizontalInput);
+        Debug.Log("Vertical Input: " + verticalInput);
 
         // Calculate movement direction
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
-        
+
         // Normalize the movement vector to avoid diagonal movement being faster
         movement.Normalize();
 
@@ -56,7 +64,6 @@ public class PlayerController : MonoBehaviour
         {
             // Increment score when player touches a Pickup object
             score++;
-            // Debug.Log("Score: " + score);
             SetScoreText();
             // Disable or destroy the coin
             other.gameObject.SetActive(false); // Or Destroy(other.gameObject);
@@ -75,6 +82,7 @@ public class PlayerController : MonoBehaviour
             winLoseBG.SetActive(true);
         }
     }
+
     private void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString();

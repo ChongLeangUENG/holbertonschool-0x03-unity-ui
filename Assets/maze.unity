@@ -2142,8 +2142,8 @@ GameObject:
   - component: {fileID: 354464433}
   - component: {fileID: 354464432}
   - component: {fileID: 354464431}
-  - component: {fileID: 354464430}
   - component: {fileID: 354464429}
+  - component: {fileID: 354464430}
   - component: {fileID: 354464434}
   m_Layer: 0
   m_Name: Player
@@ -2177,7 +2177,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 64
   m_CollisionDetection: 0
 --- !u!135 &354464430
 SphereCollider:
