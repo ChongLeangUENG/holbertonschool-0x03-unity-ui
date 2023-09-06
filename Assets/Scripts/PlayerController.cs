@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Load the menu scene
+            SceneManager.LoadScene("MainMenu");
+        }
+
         if (health <= 0 && !isGameOver)
         {
             // Set game over text and colors
