@@ -34,9 +34,8 @@ public class PlayerController : MonoBehaviour
             // Disable further updates to prevent multiple triggers
             isGameOver = true;
 
-            // Reset health and score
-            health = 5;
-            score = 0;
+            // Use the LoadScene coroutine with a delay of 3 seconds
+            StartCoroutine(LoadScene(3));
         }
     }
 
@@ -45,8 +44,6 @@ public class PlayerController : MonoBehaviour
         // Get input values
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Debug.Log("Horizontal Input: " + horizontalInput);
-        Debug.Log("Vertical Input: " + verticalInput);
 
         // Calculate movement direction
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
@@ -80,6 +77,9 @@ public class PlayerController : MonoBehaviour
             winLoseText.GetComponent<Text>().color = Color.black;
             winLoseBG.GetComponent<Image>().color = Color.green;
             winLoseBG.SetActive(true);
+
+            // Use the LoadScene coroutine with a delay of 3 seconds
+            StartCoroutine(LoadScene(3));
         }
     }
 
@@ -91,5 +91,14 @@ public class PlayerController : MonoBehaviour
     void SetHealthText()
     {
         healthText.text = "Health: " + health.ToString();
+    }
+
+    // Coroutine to load the scene with a delay
+    private IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        // Reload the current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
